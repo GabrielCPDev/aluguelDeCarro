@@ -3,7 +3,7 @@ package model.entities;
 import java.util.Date;
 
 public class CarRental {
-	
+
 	private Date start;
 	private Date finish;
 	
@@ -12,11 +12,11 @@ public class CarRental {
 	
 	public CarRental() {
 	}
-	
-	public CarRental (Date finish, Date start, Vehicle vehicle) {
-		this.start= start;
-		this.finish= finish;
-		this.vehicle= vehicle;
+
+	public CarRental(Date start, Date finish, Vehicle vehicle) {
+		this.start = start;
+		this.finish = finish;
+		this.vehicle = vehicle;
 	}
 
 	public Date getStart() {
@@ -50,7 +50,4 @@ public class CarRental {
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
-	
-	
-
 }

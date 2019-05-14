@@ -13,38 +13,36 @@ import model.services.RentalService;
 
 public class Program {
 
-	public static void main(String[] args)throws ParseException {
-	
+	public static void main(String[] args) throws ParseException {
+
 		Locale.setDefault(Locale.US);
-		Scanner sc= new Scanner(System.in);
-		SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy HH:SS");
+		Scanner sc = new Scanner(System.in);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		System.out.println("Enter rental data: ");
-		System.out.println("Car Model: ");
+		System.out.println("Enter rental data");
+		System.out.print("Car model: ");
 		String carModel = sc.nextLine();
-		System.out.println("Pickup (dd/MM/yyy hh:ss): ");
+		System.out.print("Pickup (dd/MM/yyyy HH:mm): ");
 		Date start = sdf.parse(sc.nextLine());
-		System.out.println("Return (dd/MM/yyy hh:ss): ");
+		System.out.print("Return (dd/MM/yyyy HH:mm): ");
 		Date finish = sdf.parse(sc.nextLine());
 		
-		CarRental cr = new CarRental(finish, start, new Vehicle(carModel));
-		
-		System.out.println("Enter price per hour: ");
+		CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
+
+		System.out.print("Enter price per hour: ");
 		double pricePerHour = sc.nextDouble();
-		System.out.println("Enter price per day: ");
+		System.out.print("Enter price per day: ");
 		double pricePerDay = sc.nextDouble();
 		
 		RentalService rentalService = new RentalService(pricePerDay, pricePerHour, new BrazilTaxService());
 		
 		rentalService.processInvoice(cr);
-		
-		System.out.println("Invoice: ");
-		System.out.println("Basic payment: "+ String.format("%.2f", cr.getInvoice().getBasicPayment()));
-		System.out.println("Tax payment: "+ String.format("%.2f", cr.getInvoice().getTax()));
-		System.out.println("Total payment: "+ String.format("%.2f", cr.getInvoice().getTotalPayment()));
-				
-				
-    sc.close();
-	}
 
+		System.out.println("INVOICE:");
+		System.out.println("Basic payment: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
+		System.out.println("Tax: " + String.format("%.2f", cr.getInvoice().getTax()));
+		System.out.println("Total payment: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
+		
+		sc.close();
+	}
 }
